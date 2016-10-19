@@ -8,7 +8,7 @@ function conv2d_forward{T}(x::Array{T}, w::Array{T}, padding, stride; bias = not
     pbias = bias==nothing ? Ptr{Void}(0) : bias
 
     if T == Cfloat
-        ccall((:conv2d_forward_f32, "libconv2d.so"),
+        ccall((:conv2d_f32, "libconv2d.so"),
             Void,
             (Ptr{Cint}, Ptr{Cfloat}, Ptr{Cint}, Ptr{Cfloat}, Ptr{Cfloat}, Ptr{Cint},
                 Ptr{Cint}, Ptr{Cfloat}, Ptr{Cfloat}),
@@ -35,7 +35,7 @@ function conv2d_backward!{T}(x::Array{T}, gx, w::Array{T}, gw, gy::Array{T}, pad
     pgbias = gbias==nothing ? Ptr{Void}(0) : gbias
 
     if T == Cfloat
-        ccall((:conv2d_backward_f32, "libconv2d.so"),
+        ccall((:conv2d_grad, "libconv2d.so"),
             Void,
             (Ptr{Cint}, Ptr{Cfloat}, Ptr{Cfloat}, Ptr{Cint}, Ptr{Cfloat}, Ptr{Cfloat},
                 Ptr{Cfloat}, Ptr{Cfloat}, Ptr{Cfloat}, Ptr{Cint}, Ptr{Cint}, Ptr{Cfloat}),

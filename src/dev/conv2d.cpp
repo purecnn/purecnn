@@ -206,7 +206,7 @@ void conv2d_backward(const int* xsize, const Dtype* x, Dtype* gx, const int* wsi
 }
 
 extern "C" {
-  void conv2d_forward_f32(const int* xsize, const float* x, const int* wsize, const float* w,
+  void conv2d_f32(const int* xsize, const float* x, const int* wsize, const float* w,
       const float* bias, const int* padding, const int* stride, float* y, float* work) {
     conv2d_forward<float>(xsize, x, wsize, w, bias, padding, stride, y, work);
   }
@@ -216,7 +216,7 @@ extern "C" {
     conv2d_forward<double>(xsize, x, wsize, w, bias, padding, stride, y, work);
   }
 
-  void conv2d_backward_f32(const int* xsize, const float* x, float* gx, const int* wsize,
+  void conv2d_grad(const int* xsize, const float* x, float* gx, const int* wsize,
       const float* w, float* gw, const float* bias, float* gbias, const float* gy,
       const int* padding, const int* stride, float* work) {
     conv2d_backward<float>(xsize, x, gx, wsize, w, gw, bias, gbias, gy, padding, stride,
